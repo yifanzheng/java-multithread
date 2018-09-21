@@ -51,6 +51,7 @@ public class TraditionalThread {
 是Runnable对象中的run()方法；反之，执行的是Thread类自身的run()方法。
 ```
 - 如果在Thread子类覆盖的run()方法中编写了运行代码，也为Thread类对象传入了一个Runnable对象。那么，线程运行时执行的代码是子类的run()方法代码，不是Runnable对象的run()方法代码。
+利用面向对象原理分析：子类对象的run()方法覆盖了父类的run()方法，所以通过父类构造函数传入的Runnable对象的作用是无效的。
 ```java
 public class TraditionalThread {
     public static void main(String[] args) {
