@@ -46,7 +46,9 @@ public class TraditionalThread {
         thread.start();
     }
 }
-查看Thread类的run()方法源代码，可以知道以上两种方式都是在调用Thread对象的run()方法，当Thread类的run()方法没有被子类覆盖时，并且为该Thread类传入了Runnable对象时，执行的是Runnable对象中的run()方法；反之，执行的是Thread类自身的run()方法。
+查看Thread类的run()方法源代码，可以知道以上两种方式都是在调用Thread对象的run()方法，
+当Thread类的run()方法没有被子类覆盖时，并且为该Thread类传入了Runnable对象时，执行的
+是Runnable对象中的run()方法；反之，执行的是Thread类自身的run()方法。
 ```
 - 如果在Thread子类覆盖的run()方法中编写了运行代码，也为Thread类对象传入了一个Runnable对象。那么，线程运行时执行的代码是子类的run()方法代码，不是Runnable对象的run()方法代码。
 ```java
