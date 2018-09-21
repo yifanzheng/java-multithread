@@ -48,12 +48,12 @@ public class TraditionalThread {
 }
 当Thread的子类对象没有传入Runnable对象时，执行的是自身的run()方法；反之，执行的是Runnable对象中的run()方法。
 ```
-- 如果在Thread子类覆盖的run()方法中编写了运行代码，也为Thread子类对象传入了一个Runnable对象。那么，线程运行时执行的代码是子类的run()方法代码，不是Runnable对象的run()方法代码。
+- 如果在Thread子类覆盖的run()方法中编写了运行代码，也为Thread类对象传入了一个Runnable对象。那么，线程运行时执行的代码是子类的run()方法代码，不是Runnable对象的run()方法代码。
 ```java
 public class TraditionalThread {
     public static void main(String[] args) {
         //匿名内部类创建方式
-        new Thread(new Runnable() {//传入的Runnable对象
+        new Thread(new Runnable() {//通过父类构造方法传入的Runnable对象
             @Override
             public void run() {
                 System.out.println(Thread.currentThread().getName());
