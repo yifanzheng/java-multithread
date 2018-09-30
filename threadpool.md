@@ -117,13 +117,20 @@ public ThreadPoolExecutor(int corePoolSize,
                           ThreadFactory threadFactory,
                           RejectedExecutionHandler handler) //后两个参数为可选参数
 ```
-`corePoolSize`：指的是保留的线程池的大小
-`maximumPoolSize`：指的是线程池的最大大小
-`keepAliveTime`：指的是空闲线程结束的超时时间
-`TimeUnit`：是一个枚举类，表示keepAliveTime的单位
-`workQueue`：表示存放任务的队列
-`threadFactory`:使用ThreadFactory创建新线程，默认使用defaultThreadFactory创建线程
-`handler`:定义处理被拒绝任务的策略，默认使用ThreadPoolExecutor.AbortPolicy,任务被拒绝时将抛出RejectExecutorException
+`corePoolSize`：指的是保留的线程池的大小  
+
+`maximumPoolSize`：指的是线程池的最大大小  
+
+`keepAliveTime`：指的是空闲线程结束的超时时间  
+
+`TimeUnit`：是一个枚举类，表示keepAliveTime的单位  
+
+`workQueue`：表示存放任务的队列  
+
+`threadFactory`:使用ThreadFactory创建新线程，默认使用defaultThreadFactory创建线程  
+
+`handler`:定义处理被拒绝任务的策略，默认使用ThreadPoolExecutor.AbortPolicy,任务被拒绝时将抛出RejectExecutorException  
+
 ##### 工作原理
 - 线程池刚创建时，里面没有一个线程，任务队列作为参数传进来。
 - 当调用`execute()`方法时，添加一个任务会有如下判断：
