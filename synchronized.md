@@ -6,7 +6,7 @@
 - 当 synchronized 关键字修饰一个代码片段的时候，该代码片段叫做同步代码块。
 - 当 synchronized 方法执行完或发生异常时，会自动释放锁。
 
-### Synchronized示例
+### Synchronized 示例
 
 ```java
 /**
@@ -22,7 +22,7 @@ public class TraditionalThreadSynchronized {
         new Thread(()->{
             while (true) {
                 try {
-                    outputer.output("zhanghaoxuan");
+                    outputer.output1("zhanghaoxuan");
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
