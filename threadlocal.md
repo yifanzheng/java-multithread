@@ -21,63 +21,62 @@
 ```java
 public class ThreadLocalTest {
 
-    private static ThreadLocal<MyThreadData> myThreadDataScope=new ThreadLocal<>();
-
     public static void main(String[] args) {
-       for(int i=0;i<2;i++){
-           new Thread(()->{
-               int data=new Random().nextInt(10000);
-               MyThreadData myData = MyThreadData.getThreadInstance();
-               myData.setName("name"+data);
-               myData.setAge(data);
-               // 将共享数据传入ThreadLocal对象中
-               myThreadDataScope.set(myData);
-               new A().get();
-               new B().get();
-           }).start();
-       }
+        for (int i = 0; i < 2; i++) {
+            new Thread(() -> {
+                // 设置共享数据
+                int data = new Random().nextInt(10000);
+                MyThreadData myData = MyThreadData.getThreadInstance();
+                myData.setName("name-" + data);
+                myData.setAge(data);
+                // 获取值
+                new A().get();
+                new B().get();
+            }).start();
+        }
     }
 
-    static class A{
+    static class A {
 
-        public void get(){
-            /*MyThreadData myThreadData = myThreadDataScope.get();*/
+        public void get() {
             MyThreadData myThreadData = MyThreadData.getThreadInstance();
-            System.out.println("A from "+Thread.currentThread().getName()+" get MyData:"+myThreadData.getName()+","+myThreadData.getAge());
+            System.out.println("A from " + Thread.currentThread().getName() + " get MyData:" + myThreadData.getName() + "," + myThreadData.getAge());
         }
 
     }
 
-    static class B{
-        public void get(){
-            /*MyThreadData myThreadData = myThreadDataScope.get();*/
+    static class B {
+        public void get() {
             MyThreadData myThreadData = MyThreadData.getThreadInstance();
-            System.out.println("B from "+Thread.currentThread().getName()+" get MyData:"+myThreadData.getName()+","+myThreadData.getAge());
+            System.out.println("B from " + Thread.currentThread().getName() + " get MyData:" + myThreadData.getName() + "," + myThreadData.getAge());
         }
     }
 
 }
 
 /**
- 将多个变量封装成一个对象
-*/
-class MyThreadData{
+ * 将多个变量封装成一个对象
+ */
+class MyThreadData {
     private String name;
 
     private int age;
 
-    private  MyThreadData(){}
+    private MyThreadData() {
+    }
 
-    private static ThreadLocal<MyThreadData> myThreadLocal=new ThreadLocal<>();
+    private static final ThreadLocal<MyThreadData> myThreadLocal = new ThreadLocal<>();
 
     /**
      * 获取ThreadLocal对象
+     *
      * @return
      */
-    public static MyThreadData getThreadInstance(){
+    public static MyThreadData getThreadInstance() {
         MyThreadData instance = myThreadLocal.get();
-        if(instance==null){
-            instance=new MyThreadData();
+        if (instance == null) {
+            System.out.println("ff" + Thread.currentThread().getName());
+            instance = new MyThreadData();
             myThreadLocal.set(instance);
         }
         return instance;
